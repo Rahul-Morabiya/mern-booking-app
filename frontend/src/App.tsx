@@ -8,8 +8,12 @@ import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import "./index.css";
 import SignIn from "./pages/SignIn";
+import AddHotel from "./pages/AddHotel";
+import { useAppContext } from "./contexts/AppContext";
+import '../src/forms/ManageHotelForm/ManageHotelForm.css'; // Import the CSS file
 
 function App() {
+  const { isLoggedIn } = useAppContext();
   return (
     <>
       <Router>
@@ -46,6 +50,18 @@ function App() {
               </Layout>
             }
           ></Route>
+          {isLoggedIn && (
+            <>
+              <Route
+                path="/add-hotel"
+                element={
+                  <Layout>
+                    <AddHotel />
+                  </Layout>
+                }
+              ></Route>
+            </>
+          )}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

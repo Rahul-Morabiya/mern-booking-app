@@ -1,0 +1,98 @@
+/* ManageHotelForm.css */
+
+/* Global styles */
+.form-container {
+  background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+.button {
+  background-color: #4CAF50;
+  
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+  
+}
+
+
+.button:hover {
+  background-color: #45a049;
+}
+
+/* TypeSection styles */
+.type-section {
+    margin-bottom: 80px;
+    color: white;
+    height: 100px;
+
+  }
+  
+  .type-label {
+    width: 90px;
+    height: 60px;
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 20px;
+    margin-right: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 15px;
+    margin-bottom:10px;
+  }
+  
+  .type-label.selected {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+/* FacilitiesSection styles */
+.facilities-section {
+  margin-bottom: 20px;
+  color:white;
+  
+}
+
+.facility-label {
+    padding-top:5px;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+  color:white;
+}
+
+.facility-label.selected {
+  background-color: #4CAF50;
+  color: white;
+}
