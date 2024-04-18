@@ -10,9 +10,9 @@ const GuestSection = () => {
   return (
     <div className="text-white">
       <h2 className="text-2xl font-bold mb-3 ">Guests</h2>
-      <div className=" bg-gray-500 flex flex-row p-4 rounded w-full">
+      <div className=" flex flex-row p-4 rounded w-full gap-5 ">
         <div className="flex flex-col">
-          <label className="text-gray-700 text-sm ">
+          <label className="text-white text-sm ">
             Adults
             <input
               className="input-field"
@@ -30,7 +30,7 @@ const GuestSection = () => {
           )}
         </div>
         <div className="flex flex-col">
-          <label className="text-gray-700 text-sm">
+          <label className="text-white text-sm">
             Children
             <input
               className="input-field"

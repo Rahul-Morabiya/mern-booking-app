@@ -11,6 +11,8 @@ import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./contexts/AppContext";
 import '../src/forms/ManageHotelForm/ManageHotelForm.css'; // Import the CSS file
+import MyHotels from "../src/pages/MyHotels";
+
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -57,6 +59,14 @@ function App() {
                 element={
                   <Layout>
                     <AddHotel />
+                  </Layout>
+                }
+              ></Route>
+              <Route
+                path="/my-hotels"
+                element={
+                  <Layout>
+                    <MyHotels/>
                   </Layout>
                 }
               ></Route>

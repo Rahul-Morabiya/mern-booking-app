@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js, ts, jsx, tsx}",
     "./src/**/*.html",
     "./src/components/**/*.tsx",
+    "./src/pages/**/*.tsx",
+    "./src/forms/**/*.tsx",
+    "./src/layouts/**/*.tsx",
   ],
   theme: {
     extend: {},
