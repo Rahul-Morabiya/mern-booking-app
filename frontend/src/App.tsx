@@ -12,6 +12,7 @@ import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./contexts/AppContext";
 import '../src/forms/ManageHotelForm/ManageHotelForm.css'; // Import the CSS file
 import MyHotels from "../src/pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
 
 
 function App() {
@@ -67,6 +68,14 @@ function App() {
                 element={
                   <Layout>
                     <MyHotels/>
+                  </Layout>
+                }
+              ></Route>
+              <Route
+                path="/edit-hotel/:hotelId"
+                element={
+                  <Layout>
+                    <EditHotel/>
                   </Layout>
                 }
               ></Route>

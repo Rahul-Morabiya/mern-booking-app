@@ -78,4 +78,50 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
   }
 });
 
+router.get("/:id", verifyToken, async (req: Request, res: Response) => {
+  const id = req.params.id.toString();
+  try {
+    const hotel = await Hotel.findOne({ _id: id, userId: req.userId });
+    res.json(hotel);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching Hotels" });
+  }
+});
+
+router.put(
+  "/:id",
+  verifyToken,
+  upload.array("imageFiles"),
+  async (req: Request, res: Response) => {
+    try {
+      const updatedHotel: HotelType = req.body;
+      updatedHotel.lastUpdated = new Date();
+
+      const hotel = await Hotel.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          userId: req.userId,
+        },
+        updatedHotel,
+        { new: true }
+      );
+
+      if(!hotel){
+        return res.status(400).json({message:"Hotel Not Found"});
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const updatedImageUrls = await uploadImages(files);
+      hotel.imageUrls = [...updatedImageUrls,...(updatedHotel.imageUrls || [])];
+
+      await hotel.save();
+      res.status(201).json(hotel);
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Something Went Wrong" });
+    }
+  }
+);
+
 export default router;
