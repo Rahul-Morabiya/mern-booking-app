@@ -39,7 +39,7 @@ const MyHotels = () => {
                 <span className="mr-2">
                   <BsMap />
                 </span>
-                {hotel.city},{hotel.country}
+                {hotel.city}, {hotel.country}
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
                 <span className="mr-2">
@@ -51,7 +51,7 @@ const MyHotels = () => {
                 <span className="mr-2">
                   <BiMoney />
                 </span>
-                &#8377;{hotel.pricePerNight} per Night
+                &#8377; {hotel.pricePerNight} per Night
               </div>
               <div className="border border-slate-300 rounded-sm p-3 flex items-center">
                 <span className="mr-2">

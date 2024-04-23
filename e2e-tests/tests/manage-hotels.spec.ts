@@ -16,13 +16,13 @@ test("should allow user to sign in add a hotel", async ({ page }) => {
   await page.goto(`${UI_URL}add-hotel`);
 
 
-  await page.locator('[name="name"]').fill("Test_Hotel");
+  await page.locator('[name="name"]').fill("Test_Hotel_9");
   await page.locator('[name="city"]').fill("Test_City");
   await page.locator('[name="country"]').fill("Test_Country");
 
   await page
     .locator('[name="description"]')
-    .fill("This is a description for the test hotel");
+    .fill("This is a description for the test hotel_9");
   await page.locator('[name="pricePerNight"]').fill("100");
   await page.selectOption('select[name="starRating"]', "3");
 
@@ -58,9 +58,9 @@ test("should display hotels", async ({page})=>{
   await expect(page.getByText("Dublin Getaways")).toBeVisible();
   await expect(page.getByText("Lorem ipsum dolor sit amet")).toBeVisible();
   
-  await expect(page.getByText("Dublin,Ireland")).toBeVisible();
+  await expect(page.getByText("Dublin, Ireland")).toBeVisible();
   await expect(page.getByText("All Inclusive")).toBeVisible();
-  await expect(page.getByText("₹119 per Night")).toBeVisible();
+  await expect(page.getByText("₹ 119 per Night")).toBeVisible();
   await expect(page.getByText("2 adults, 3 children")).toBeVisible();
   await expect(page.getByText("2 Star Rating")).toBeVisible();
   await expect(page.getByRole("link",{name:"View Details"}).first()).toBeVisible();
@@ -83,8 +83,8 @@ test("should edit hotel",async({page})=>{
   await page.goto(`${UI_URL}my-hotels`);
   await page.getByRole("link",{name:"View Details"}).first().click();
   await page.waitForSelector('[name="name"]',{state:"attached"});
-  await expect(page.locator('[name="name"]')).toHaveValue('Dublin Getaways UPDATED');
-  await page.locator('[name="name"]').fill("Dublin Getaways UPDATED 2");
+  await expect(page.locator('[name="name"]')).toHaveValue('Dublin Getaways');
+  await page.locator('[name="name"]').fill("Dublin Getaways");
   await page.getByRole("button",{name:"Save"}).click();
   await expect(page.getByText("Hotel Saved")).toBeVisible();
 });
