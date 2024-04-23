@@ -1,7 +1,7 @@
 # Hotel Booking App
 Welcome to my Hotel Booking App project, a comprehensive Hotel Booking App developed using the MERN stack, which comprises MongoDB, Express.js, React.js, and Node.js. This project is a full-fledged application that allows users to search, book, and manage hotel bookings seamlessly.
 
-Link to the website deployed on Render: [Hotel Booking App on Render](https://mern-booking-app-8yb2.onrender.com/)
+Link to the website deployed on Render: [Hotel Booking App Link](https://mern-booking-app-8yb2.onrender.com/) (It may take a minute since it requires some time to load)
 
 Some Images :
 
