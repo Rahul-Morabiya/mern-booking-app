@@ -1,8 +1,13 @@
-/* ManageHotelForm.css */
-
-/* Global styles */
 .form-container {
-  background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 10px;
+}
+
+.form-container {
+  background-image: url("https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11,88 +16,97 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.input-label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+.button:hover {
+  background-color: #0056b3;
 }
 
 .error-message {
-  color: red;
-  font-size: 14px;
+  color: #dc3545;
+  font-size: 0.8rem;
 }
 
-.button {
-  background-color: #4CAF50;
-  
-  color: white;
-  padding: 14px 20px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 4px;
+.type-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  width: 50%;
-  
+  transition: background-color 0.3s ease;
 }
 
-
-.button:hover {
-  background-color: #45a049;
-}
-
-/* TypeSection styles */
-.type-section {
-    margin-bottom: 80px;
-    color: white;
-    height: 100px;
-
-  }
-  
-  .type-label {
-    width: 90px;
-    height: 60px;
-    background-color: #e0e0e0;
-    padding: 20px;
-    border-radius: 20px;
-    margin-right: 10px;
-    padding-top: 10px;
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-    vertical-align: top;
-    line-height: 15px;
-    margin-bottom:10px;
-  }
-  
-  .type-label.selected {
-    background-color: #4CAF50;
-    color: white;
-  }
-
-/* FacilitiesSection styles */
-.facilities-section {
-  margin-bottom: 20px;
-  color:white;
-  
+.type-label.selected {
+  background-color: #007bff;
+  color: white;
 }
 
 .facility-label {
-    padding-top:5px;
-  display: inline-block;
-  margin-right: 10px;
-  cursor: pointer;
-  color:white;
+  display: flex;
+  align-items: center;
 }
 
-.facility-label.selected {
-  background-color: #4CAF50;
-  color: white;
+.input-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-field {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8rem;
+}
+.type-section {
+  margin-bottom: 20px;
+}
+
+.type-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.facilities-section {
+  margin-bottom: 20px;
+}
+
+.facilities-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.type-label {
+  cursor: pointer;
+  color: gray;
+  background-color: #e6ffff;
+}
+
+.type-label:hover {
+  background-color: #dbe4f0;
+  color: green;
+}
+
+.facility-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.facility-label:hover {
+  background-color: #e6ffff;
+  color: green;
 }

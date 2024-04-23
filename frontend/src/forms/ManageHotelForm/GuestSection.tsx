@@ -3,19 +3,17 @@ import { HotelFormData } from "./ManageHotelForm";
 import "./ManageHotelForm.css";
 
 const GuestSection = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<HotelFormData>();
+  const { register, formState: { errors } } = useFormContext<HotelFormData>();
+
   return (
-    <div className="text-white">
-      <h2 className="text-2xl font-bold mb-3 ">Guests</h2>
-      <div className=" flex flex-row p-4 rounded w-full gap-5 ">
+    <div className="guest-section">
+      <h2 className="text-2xl font-bold mb-3">Guests</h2>
+      <div className="flex flex-row p-4 rounded w-full gap-6">
         <div className="flex flex-col">
-          <label className="text-white text-sm ">
-            Adults
+          <label className="text-white text-sm">
+            Adults 
             <input
-              className="input-field"
+              className="input-field ml-2"
               type="number"
               id="adultQuantity"
               min={1}
@@ -25,15 +23,15 @@ const GuestSection = () => {
               })}
             />
           </label>
-          {errors.adultCount?.message && (
-            <span className="error-message">{errors.adultCount?.message}</span>
+          {errors.adultCount && (
+            <span className="error-message">{errors.adultCount.message}</span>
           )}
         </div>
         <div className="flex flex-col">
           <label className="text-white text-sm">
             Children
             <input
-              className="input-field"
+              className="input-field ml-2" 
               type="number"
               id="childrenQuantity"
               min={0}
@@ -49,8 +47,8 @@ const GuestSection = () => {
               })}
             />
           </label>
-          {errors.childCount?.message && (
-            <span className="error-message">{errors.childCount?.message}</span>
+          {errors.childCount && (
+            <span className="error-message">{errors.childCount.message}</span>
           )}
         </div>
       </div>

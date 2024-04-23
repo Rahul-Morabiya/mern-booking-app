@@ -13,6 +13,7 @@ import { useAppContext } from "./contexts/AppContext";
 import '../src/forms/ManageHotelForm/ManageHotelForm.css'; // Import the CSS file
 import MyHotels from "../src/pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
+import Search from "./pages/Search";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             path="/search"
             element={
               <Layout>
-                <p>Search Page</p>
+                <Search/>
               </Layout>
             }
           />
@@ -53,6 +54,7 @@ function App() {
               </Layout>
             }
           ></Route>
+          
           {isLoggedIn && (
             <>
               <Route
