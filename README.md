@@ -3,12 +3,13 @@ Welcome to my Hotel Booking App project, a comprehensive Hotel Booking App devel
 
 Link to the website deployed on Render: [Hotel Booking App on Render](https://mern-booking-app-8yb2.onrender.com/)
 
-Some Images:-
-Home Page Search:-
+Some Images :
+
+1) Home Page Search:-
 ![image](https://github.com/Rahul-Morabiya/mern-booking-app/assets/132494312/3074125b-7acb-456a-a490-c4b1f1d9ae21)
-My Hotels Page:-
+2) My Hotels Page:-
 ![image](https://github.com/Rahul-Morabiya/mern-booking-app/assets/132494312/1651d59c-73c7-4067-9a3f-4ebb788c7190)
-Add Hotel Page:-
+3) Add Hotel Page:-
 ![image](https://github.com/Rahul-Morabiya/mern-booking-app/assets/132494312/e52bb700-6304-468d-842b-4fa57ce33195)
 
 
