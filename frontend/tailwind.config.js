@@ -6,6 +6,8 @@ export default {
     "./src/**/*.html",
     "./src/components/**/*.tsx",
     "./src/pages/**/*.tsx",
+    "./src/pages/MyBookings/*.tsx",
+    "./src/pages/Detail/*.tsx",
     "./src/forms/**/*.tsx",
     "./src/forms/BookingForm/**/*.tsx",
     "./src/forms/GuestInfoForm/**/*.tsx",
