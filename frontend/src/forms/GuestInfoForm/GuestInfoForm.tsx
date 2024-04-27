@@ -135,11 +135,11 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
           </div>
           <div className="flex justify-center items-center ">
             {isLoggedIn ? (
-              <button className="w-200 mt-4 bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+              <button className="w-full mt-4 bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
                 Book Now
               </button>
             ) : (
-              <button className="mt-4 bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
+              <button className="w-full mt-4 bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
                 Sign in to Book
               </button>
             )}

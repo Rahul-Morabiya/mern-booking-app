@@ -1,14 +1,16 @@
 import express, { Request, Response } from "express";
-import Hotel, { HotelSearchResponse } from "../models/my-hotels";
 import { param, validationResult } from "express-validator";
+import Stripe from "stripe";
+import {verifyToken} from "../middleware/auth";
+import Hotel, { BookingType, HotelSearchResponse } from "../models/my-hotels";
+
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 const router = express.Router();
 
-
-
 router.get("/search", async (req: Request, res: Response) => {
   try {
-    const { constructedQuery, queryParams } = constructSearchQuery(req.query);
+    const query = constructSearchQuery(req.query);
 
     let sortOptions = {};
     switch (req.query.sortOption) {
@@ -29,12 +31,12 @@ router.get("/search", async (req: Request, res: Response) => {
     );
     const skip = (pageNumber - 1) * pageSize;
 
-    const hotels = await Hotel.find(constructedQuery)
+    const hotels = await Hotel.find(query)
       .sort(sortOptions)
       .skip(skip)
       .limit(pageSize);
 
-    const total = await Hotel.countDocuments(constructedQuery);
+    const total = await Hotel.countDocuments(query);
 
     const response: HotelSearchResponse = {
       data: hotels,
@@ -44,10 +46,21 @@ router.get("/search", async (req: Request, res: Response) => {
         pages: Math.ceil(total / pageSize),
       },
     };
+
     res.json(response);
   } catch (error) {
     console.log("error", error);
-    res.status(500).json({ message: "Something Went Wrong" });
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+    res.json(hotels);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error fetching hotels" });
   }
 });
 
@@ -62,14 +75,87 @@ router.get(
 
     const id = req.params.id.toString();
 
-    try{
+    try {
       const hotel = await Hotel.findById(id);
       res.json(hotel);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error fetching hotel" });
     }
-    catch(error){
-      return res.status(500).json({message:"Error fetching"});
+  }
+);
+
+router.post(
+  "/:hotelId/bookings/payment-intent",
+  verifyToken,
+  async (req: Request, res: Response) => {
+    const { numberOfNights } = req.body;
+    const hotelId = req.params.hotelId;
+
+    const hotel = await Hotel.findById(hotelId);
+    if (!hotel) {
+      return res.status(400).json({ message: "Hotel not found" });
     }
 
+    const totalCost = hotel.pricePerNight * numberOfNights;
+
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: totalCost * 100,
+        currency: "INR",
+        metadata: {
+          hotelId,
+          userId: req.userId,
+        },
+      });
+
+      if (!paymentIntent.client_secret) {
+        return res.status(500).json({ message: "Error creating payment intent" });
+      }
+
+      const response = {
+        paymentIntentId: paymentIntent.id,
+        clientSecret: paymentIntent.client_secret.toString(),
+        totalCost,
+      };
+
+      res.send(response);
+    } catch (error) {
+      console.error("Error creating payment intent:", error);
+      res.status(500).json({ message: "Error creating payment intent" });
+    }
+  }
+);
+
+
+router.post(
+  "/:hotelId/bookings",
+  verifyToken,
+  async (req: Request, res: Response) => {
+    try {
+
+      const newBooking: BookingType = {
+        ...req.body,
+        userId: req.userId,
+      };
+
+      const hotel = await Hotel.findOneAndUpdate(
+        { _id: req.params.hotelId },
+        {
+          $push: { bookings: newBooking },
+        }
+      );
+
+      if (!hotel) {
+        return res.status(400).json({ message: "hotel not found" });
+      }
+
+      await hotel.save();
+      res.status(200).send();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "something went wrong" });
+    }
   }
 );
 
@@ -83,13 +169,13 @@ const constructSearchQuery = (queryParams: any) => {
     ];
   }
 
-  if (queryParams.adultCount && !isNaN(parseInt(queryParams.adultCount))) {
+  if (queryParams.adultCount) {
     constructedQuery.adultCount = {
       $gte: parseInt(queryParams.adultCount),
     };
   }
 
-  if (queryParams.childCount && !isNaN(parseInt(queryParams.childCount))) {
+  if (queryParams.childCount) {
     constructedQuery.childCount = {
       $gte: parseInt(queryParams.childCount),
     };
@@ -112,23 +198,20 @@ const constructSearchQuery = (queryParams: any) => {
   }
 
   if (queryParams.stars) {
-    const starRating = Array.isArray(queryParams.stars)
-      ? { $in: queryParams.stars.map((star: string) => parseInt(star)) }
+    const starRatings = Array.isArray(queryParams.stars)
+      ? queryParams.stars.map((star: string) => parseInt(star))
       : parseInt(queryParams.stars);
-    constructedQuery.starRating = starRating;
+
+    constructedQuery.starRating = { $in: starRatings };
   }
 
   if (queryParams.maxPrice) {
-    const maxPrice = parseInt(queryParams.maxPrice);
-    if (!isNaN(maxPrice)) {
-      constructedQuery.pricePerNight = {
-        $lte: maxPrice,
-      };
-    }
+    constructedQuery.pricePerNight = {
+      $lte: parseInt(queryParams.maxPrice).toString(),
+    };
   }
 
-  return { constructedQuery, queryParams };
+  return constructedQuery;
 };
-
 
 export default router;

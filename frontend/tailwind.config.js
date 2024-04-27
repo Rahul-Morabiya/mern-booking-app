@@ -7,6 +7,8 @@ export default {
     "./src/components/**/*.tsx",
     "./src/pages/**/*.tsx",
     "./src/forms/**/*.tsx",
+    "./src/forms/BookingForm/**/*.tsx",
+    "./src/forms/GuestInfoForm/**/*.tsx",
     "./src/layouts/**/*.tsx",
   ],
   theme: {

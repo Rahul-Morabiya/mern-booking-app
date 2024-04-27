@@ -25,9 +25,7 @@ Mastered the art of adding, editing, and viewing hotels, covering everything fro
 Integrated image uploads using Cloudinary, a crucial feature for any booking platform.
 4) Search, Sort, & Filter
 Enhanced the user experience with functionalities to search, sort, and filter hotels, making it easy for users to find their perfect stay.
-5) Online Payments
-Integrated Stripe for secure and efficient hotel booking payments.
-6) Booking Management
+5) Booking Management
 Implemented the feature to view and manage bookings, essential for any booking application.
-7) Automated Tests
+6) Automated Tests
 Conducted automated tests for authentication, hotel features, search page, and booking functionalities, ensuring robust and error-free performance.

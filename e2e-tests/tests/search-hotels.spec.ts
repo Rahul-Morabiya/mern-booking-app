@@ -14,20 +14,43 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole("link", { name: "My Hotels" })).toBeVisible();
 });
 
-test("Should show hotel search results", async({page})=>{
-    await page.goto(UI_URL);
-    await page.getByPlaceholder("Where are you going?").fill("Dublin");
-    await page.getByRole("button",{name:"Search"}).click();
-    
-    await expect(page.getByText("Hotels found in Dublin")).toBeVisible();
-    await expect(page.getByText("Dublin Getaways")).toBeVisible();
+test("Should show hotel search results", async ({ page }) => {
+  await page.goto(UI_URL);
+  await page.getByPlaceholder("Where are you going?").fill("Dublin");
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await expect(page.getByText("Hotels found in Dublin")).toBeVisible();
+  await expect(page.getByText("Dublin Getaways")).toBeVisible();
 });
 
-test("should show hotel detail",async ({page})=>{
+test("should show hotel detail", async ({ page }) => {
   await page.getByPlaceholder("Where are you going?").fill("Dublin");
-    await page.getByRole("button",{name:"Search"}).click();
+  await page.getByRole("button", { name: "Search" }).click();
 
-    await page.getByText("Dublin Getaways").click();
-    await expect(page).toHaveURL(/detail/);
-    await expect(page.getByRole("button",{name:"Book now"})).toBeVisible();
+  await page.getByText("Dublin Getaways").click();
+  await expect(page).toHaveURL(/detail/);
+  await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
+});
+
+test("should book hotel", async ({ page }) => {
+  await page.getByPlaceholder("Where are you going?").fill("Dublin");
+
+  const date=new Date();
+  date.setDate(date.getDate()+3);
+  const formattedDate=date.toISOString().split("T")[0];
+
+
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await page.getByText("Dublin Getaways").click();
+  await page.getByPlaceholder("Check-out Date").fill(formattedDate);
+
+  await page.getByRole("button",{name:"Book now"}).click();
+
+  await expect(page.getByText("Total Cost: Rs 357.00")).toBeVisible();
+  
+  await page.getByRole("button",{name:"Confirm Booking"}).click();
+  await expect(page.getByText("Booking Saved!")).toBeVisible();  
+
+
 });
