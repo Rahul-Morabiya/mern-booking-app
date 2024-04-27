@@ -29,6 +29,8 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
 
     
 const app=express();
+const port =process.env.PORT||7000;
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));

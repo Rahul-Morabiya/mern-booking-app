@@ -29,7 +29,7 @@ function App() {
             path="/"
             element={
               <Layout>
-                <Search/>
+                <Home/>
               </Layout>
             }
           />
