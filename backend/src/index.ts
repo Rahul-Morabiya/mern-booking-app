@@ -9,7 +9,7 @@ import path from "path";
 import {v2 as cloudinary} from "cloudinary";
 import myHotelRoutes from "./routes/myHotelsRoutes";
 import hotelRoutes from "./routes/hotels";
-import bookingRoutes from "../src/routes/my-bookings";
+import bookingRoutes from "./routes/my-bookings";
 
 cloudinary.config({
     cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
